@@ -1,3 +1,17 @@
+;;;analyser-log.el - speed changing from log output to source code
+;;
+;; Copyright (C) 2015 Dmitry Pichugin
+;; Keywords: grep-find
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;
+;;; Commentary:
+;;    This module is used for fast finding log message into  source code which printed it.
+;;    Key map:
+;;       C-c f - find line or region of line in directory of source code
+;;       C-c s - change path to directory of source code
+;;; Code:
 (defvar source-path "~/")
 
 (defun set-source-path (path)
@@ -27,8 +41,4 @@
 	    (define-key map (kbd "C-c s") 'set-source-path)
             map)
   (call-interactively 'set-source-path))
-
-
-
-
 
