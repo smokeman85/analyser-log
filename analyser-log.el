@@ -21,6 +21,9 @@
 (defvar alog--set-source-path-key (kbd "C-c s")
   "Key for set path")
 
+(defvar alog--load-p nil
+  "is mode enable")
+
 (defun set-source-path (path)
   (interactive "DSrc path:")
   (setq alog--source-path path))
@@ -47,5 +50,7 @@
             (define-key map alog--find-key 'find-source)
 	    (define-key map alog--set-source-path-key 'set-source-path)
             map)
-  (call-interactively 'set-source-path))
+  (if (not alog--load-p)
+   (call-interactively 'set-source-path))
+  (setq alog--load-p t))
 
