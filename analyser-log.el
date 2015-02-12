@@ -12,11 +12,12 @@
 ;;       C-c f - find line or region of line in directory of source code
 ;;       C-c s - change path to directory of source code
 ;;; Code:
-(defvar source-path "~/")
+(defvar alog--source-path "~/"
+  "Default path to directory of source code")
 
 (defun set-source-path (path)
   (interactive "DSrc path:")
-  (setq source-path path))
+  (setq alog--source-path path))
 
 (defun cmd-grep-find (path str)
   (grep-find (concat "find " path " -type f -exec grep -nH  " str " {} +")))
@@ -27,11 +28,11 @@
           (if (use-region-p)
               (buffer-substring-no-properties (region-beginning) (region-end))
             (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-  (cmd-grep-find source-path (prin1-to-string find-str)))
+  (cmd-grep-find alog--source-path (prin1-to-string find-str)))
 
 (defun print-source-path ()
   (interactive)
-  (message source-path))
+  (message alog--source-path))
 
 (define-minor-mode analyser-log-mode 
   "Analyser log functionality"
