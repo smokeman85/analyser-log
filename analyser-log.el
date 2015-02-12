@@ -1,4 +1,4 @@
-;;;analyser-log.el - speed changing from log output to source code
+;;;analyser-log.el - fast finding log message into source code which printed it
 ;;
 ;; Copyright (C) 2015 Dmitry Pichugin
 ;; Keywords: grep-find
