@@ -15,6 +15,12 @@
 (defvar alog--source-path "~/"
   "Default path to directory of source code")
 
+(defvar alog--find-key (kbd "C-c f")
+  "Key for find")
+
+(defvar alog--set-source-path-key (kbd "C-c s")
+  "Key for set path")
+
 (defun set-source-path (path)
   (interactive "DSrc path:")
   (setq alog--source-path path))
@@ -38,8 +44,8 @@
   "Analyser log functionality"
   :lighter " alog"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c f") 'find-source)
-	    (define-key map (kbd "C-c s") 'set-source-path)
+            (define-key map alog--find-key 'find-source)
+	    (define-key map alog--set-source-path-key 'set-source-path)
             map)
   (call-interactively 'set-source-path))
 
