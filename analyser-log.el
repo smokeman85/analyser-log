@@ -22,13 +22,16 @@
   "Key for set path")
 
 (defun set-source-path (path)
+  "Set path to directory of source code"
   (interactive "DSrc path:")
   (setq alog--source-path path))
 
 (defun cmd-grep-find (path str)
+  "Command grep-find"
   (grep-find (concat "find " path " -type f -exec grep -nH  " str " {} +")))
 
 (defun find-source ()
+  "Find line or region in src dir"
   (interactive)
   (setq find-str
           (if (use-region-p)
