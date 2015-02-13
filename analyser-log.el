@@ -12,6 +12,7 @@
 ;;       C-c f - find line or region of line in directory of source code
 ;;       C-c s - change path to directory of source code
 ;;; Code:
+;;=============var====================
 (defvar alog--source-path "~/"
   "Default path to directory of source code")
 
@@ -23,6 +24,16 @@
 
 (defvar alog--load-p nil
   "is mode enable")
+
+(defvar alog--file-ext "*.*"
+  "Extensions of file")
+
+
+;;=============func====================
+
+(defun set-ext-file (ext)
+  (interactive "sSet extensions of file:")
+  (setq alog--file-ext ext))
 
 (defun set-source-path (path)
   "Set path to directory of source code"
@@ -45,6 +56,11 @@
 (defun print-source-path ()
   (interactive)
   (message alog--source-path))
+
+(defun prepare-ext-find (exts str)
+  (if (eq (cdr exts) nil)
+      (concat str " -name " (car exts))
+      (prepare-ext-find (cdr exts) (concat str " -name " (car exts) " -or "))))
 
 (define-minor-mode analyser-log-mode 
   "Analyser log functionality"
