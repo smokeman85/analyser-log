@@ -25,7 +25,7 @@
 (defvar alog--load-p nil
   "is mode enable")
 
-(defvar alog--file-ext "*.*"
+(defvar alog--file-ext nil
   "Extensions of file")
 
 
@@ -42,7 +42,10 @@
 
 (defun cmd-grep-find (path str)
   "Command grep-find"
-  (grep-find (concat "find " path " -type f -exec grep -nH  " str " {} +")))
+  (grep-find (concat "find " path  
+		     " -type f -exec grep -nH  " str 
+		     (if alog--file-ext (prepare-ext-find (split-string alog--file-ext) " ")) 
+		     " {} +")))
 
 (defun find-source ()
   "Find line or region in src dir"
@@ -59,8 +62,8 @@
 
 (defun prepare-ext-find (exts str)
   (if (eq (cdr exts) nil)
-      (concat str " -name " (car exts))
-      (prepare-ext-find (cdr exts) (concat str " -name " (car exts) " -or "))))
+      (concat str " --include=" (car exts))
+      (prepare-ext-find (cdr exts) (concat str " --include=" (car exts) " "))))
 
 (define-minor-mode analyser-log-mode 
   "Analyser log functionality"
